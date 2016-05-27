@@ -66,6 +66,38 @@
     ;; FIXME: What license?
     (license (non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=LICENCE.radeon_firmware;hb=HEAD"))))
 
+(define-public RTL8188CE-firmware-non-free
+  (package
+    (name "RTL8188CE-firmware-non-free")
+    (version "f6c767f398fc34a89d05d970ed04e21b781fc33f")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git")
+                      (commit version)))
+              (sha256
+               (base32
+		"1lpqigsw93xswcxw9ykxmms2smx86070mg51jqpf7n9w9h6jjs79"))))
+    (build-system trivial-build-system)
+    (arguments
+     `(#:modules ((guix build utils))
+       #:builder (begin
+                   (use-modules (guix build utils))
+                   (let ((source (assoc-ref %build-inputs "source"))
+                         (fw-dir (string-append %output "/lib/firmware/rtlwifi/")))
+                     (mkdir-p fw-dir)
+                     (for-each (lambda (file)
+                                 (copy-file file
+                                            (string-append fw-dir "/"
+                                                           (basename file))))
+                               (find-files source "rtl8192.*\\.bin$|LICENCE.rtlwifi_firmware.txt"))
+                     #t))))
+
+    (home-page "")
+    (synopsis "Non-free firmware for Realtek WiFi chips")
+    (description "Non-free firmware for Realtek WiFi chips")
+    ;; FIXME: What license?
+    (license (non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=LICENCE.rtlwifi_firmware;hb=HEAD"))))
 
 (define (linux-nonfree-urls version)
   "Return a list of URLs for Linux-Nonfree VERSION."
@@ -74,7 +106,7 @@
          "linux-" version ".tar.xz")))
 
 (define-public linux-nonfree
-  (let* ((version "4.1.4"))
+  (let* ((version "4.1.24"))
     (package
       (inherit linux-libre)
       (name "linux-nonfree")
@@ -84,7 +116,7 @@
                 (uri (linux-nonfree-urls version))
                 (sha256
                  (base32
-                  "17whsim5l9i486y5kchfpm9jhbr9lak4a1gdqygp5kwfrfyz5qiy"))))
+                  "1pvq082014riwn5dj8phy6pgbyy5xdxlksw6h6s3pymdjrzpphlw"))))
       (synopsis "Mainline Linux kernel, nonfree binary blobs included.")
       (description "Linux is a kernel.")
       (license gpl2)
