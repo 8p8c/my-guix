@@ -1,5 +1,5 @@
 ;; System reconfiguratin command below:
-;; GUIX_PACKAGE_PATH=/home/camel/git/guix-packages/ guix system reconfigure /home/camel/git/guix-config/config.scm
+;; GUIX_PACKAGE_PATH=/home/camel/git/my-guix/ guix system reconfigure --fallback /home/camel/git/my-guix/config.scm
 (use-modules (gnu)
              (gnu packages admin)
              (gnu packages fonts)

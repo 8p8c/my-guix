@@ -31,7 +31,7 @@
     (source
      (origin
       (method url-fetch)
-      (uri "file:///home/camel/git/guix-packages/cacerts")
+      (uri "file:///home/camel/git/my-guix/packages/cacerts")
       (sha256
        (base32
         "1ksxkbvhx1ga6yr5l7h6yxx5kqnvk1cxbyg8d7xd55anbaq8vi6x"))))
