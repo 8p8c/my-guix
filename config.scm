@@ -1,5 +1,5 @@
 ;; System reconfiguratin command below:
-;; GUIX_PACKAGE_PATH=/home/camel/git/my-guix/ guix system reconfigure --fallback /home/camel/git/my-guix/config.scm
+;; GUIX_PACKAGE_PATH=/home/camel/git/my-guix/packages/ guix system reconfigure --fallback /home/camel/git/my-guix/config.scm
 (use-modules (gnu)
              (gnu packages admin)
              (gnu packages fonts)
@@ -33,9 +33,8 @@
              (guix store)
              (srfi srfi-1)
              (linux-nonfree)
-             (xorg-ati)
-             (font-hack)
-             (java-certs))
+             (java-certs)
+             (xorg-ati))
 ;; (use-service-modules xorg ati avahi dbus desktop networking ssh)
 ;; (use-package-modules admin certs slim xorg)
 (use-service-modules avahi dbus networking ssh)
@@ -81,13 +80,11 @@ EndSection
   (packages (cons*
              evince
              font-dejavu
-             ;; font-hack
              font-inconsolata
              font-liberation
              font-terminus
              font-ubuntu
              git
-             ;; guile
              htop
              i3-wm
              icecat
