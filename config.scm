@@ -32,6 +32,7 @@
              (guix monads)
              (guix store)
              (srfi srfi-1)
+             (font-hack)
              (linux-nonfree)
              (java-certs)
              (xorg-ati))
@@ -80,6 +81,7 @@ EndSection
   (packages (cons*
              evince
              font-dejavu
+             font-hack
              font-inconsolata
              font-liberation
              font-terminus
