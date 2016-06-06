@@ -52,7 +52,7 @@
                     "https://github.com/chrissimpkins/Hack/releases/download/v"
                     version
                     "/Hack-v"
-                    "2_020" ;; FIXME
+                    (string-replace-substring version "." "_")
                     "-ttf.zip"))
               (sha256
                (base32
@@ -90,6 +90,6 @@
     (synopsis "A typeface designed for sourcecode.")
     (description "The Hack Font is designed for the screen.")
     (license
-     (license:non-copyleft ;;FIXME
+     (license:x11-style
       "https://github.com/chrissimpkins/Hack/blob/master/LICENSE.md"
       "Hack Open Font License v2.0"))))
