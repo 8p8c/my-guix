@@ -11,7 +11,7 @@
 ;;; Copyright © 2016 Eric Bavier <bavier@member.fsf.org>
 ;;; Copyright © 2016 Dmitry Nikolaev <cameltheman@gmail.com>
 ;;;
-;;; This file is not part of GNU Guix yet. ;;FIXME
+;;; This package definition is includes in GuixSD. See fonts.scm.
 ;;;
 ;;; GNU Guix is free software; you can redistribute it and/or modify it
 ;;; under the terms of the GNU General Public License as published by
