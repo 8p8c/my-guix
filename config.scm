@@ -2,6 +2,8 @@
 ;; GUIX_PACKAGE_PATH=/home/camel/git/my-guix/packages/ guix system reconfigure --fallback /home/camel/git/my-guix/config.scm
 (use-modules (gnu)
              (gnu packages admin)
+             (gnu packages audacity)
+             (gnu packages audio)
              (gnu packages fonts)
              (gnu packages gl)
              (gnu packages gnome)
@@ -16,6 +18,7 @@
              (gnu packages slim)
              (gnu packages suckless)
              (gnu packages version-control)
+             (gnu packages video)
              (gnu packages wget)
              (gnu packages wicd)
              (gnu packages wm)
@@ -79,6 +82,9 @@ EndSection
 
   ;; This is where we specify system-wide packages.
   (packages (cons*
+             alsa-utils
+             audacity
+             avidemux
              evince
              font-dejavu
              font-hack
@@ -91,18 +97,21 @@ EndSection
              i3-wm
              icecat
              icedtea
+             jack-2
              java-certs
              lm-sensors
              mesa
              mesa-utils
              nss-certs ;for HTTPS access
-             screen
-             slim
              pavucontrol
              perf-nonfree
+             recordmydesktop
              ruby
              rxvt-unicode
+             screen
+             slim
              tcpdump
+             vlc
              wget
              wicd
              wpa-supplicant
