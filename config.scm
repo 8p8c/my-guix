@@ -4,6 +4,7 @@
              (gnu packages admin)
              (gnu packages audacity)
              (gnu packages audio)
+             (gnu packages display-managers)
              (gnu packages fonts)
              (gnu packages gl)
              (gnu packages gnome)
@@ -15,7 +16,6 @@
              (gnu packages pulseaudio)
              (gnu packages ruby)
              (gnu packages screen)
-             (gnu packages slim)
              (gnu packages suckless)
              (gnu packages version-control)
              (gnu packages video)
@@ -58,7 +58,10 @@ EndSection
 
 (operating-system
   (kernel linux-nonfree)
-  (firmware (cons* radeon-RS780-firmware-non-free RTL8188CE-firmware-non-free %base-firmware))
+  (firmware (cons*
+             radeon-RS780-firmware-non-free
+             RTL8188CE-firmware-non-free
+             %base-firmware))
   (host-name "camelot")
   (timezone "Europe/Moscow")
   (locale "en_US.UTF-8")
