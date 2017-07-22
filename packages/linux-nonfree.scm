@@ -24,84 +24,51 @@
 (define-module (linux-nonfree)
   #:use-module ((guix licenses) #:hide (zlib))
   #:use-module (gnu packages linux)
+  #:use-module (gnu packages compression)
   #:use-module (guix build-system trivial)
   #:use-module (guix git-download)
   #:use-module (guix packages)
-  #:use-module (guix download))
+  #:use-module (guix download)
+  #:use-module (guix gexp))
 
-;;; Forgive me Stallman for I have sinned.
+;;; Forgive me mr. Stallman for I have sinned.
 
-(define-public radeon-RS780-firmware-non-free
+(define-public firmware-nonfree
   (package
-    (name "radeon-RS780-firmware-non-free")
-    (version "f6c767f398fc34a89d05d970ed04e21b781fc33f")
+    (name "firmware-nonfree")
+    (version "37857004a430e96dc837db7f967b6d0279053de8")
     (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git")
+                    (url
+"https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git")
                     (commit version)))
               (sha256
                (base32
-                "1lpqigsw93xswcxw9ykxmms2smx86070mg51jqpf7n9w9h6jjs79"))))
+                "08nw19yl98vcxqzwipacsv6d8b04fyr7qgij5092nnwmlysqxl9a"))))
     (build-system trivial-build-system)
     (arguments
      `(#:modules ((guix build utils))
                  #:builder (begin
                              (use-modules (guix build utils))
                              (let ((source (assoc-ref %build-inputs "source"))
-                                   (fw-dir (string-append %output "/lib/firmware/radeon/")))
+                                   (fw-dir (string-append %output "/lib/firmware/")))
                                (mkdir-p fw-dir)
-                               (for-each (lambda (file)
-                                           (copy-file file
-                                                      (string-append fw-dir "/"
-                                                                     (basename file))))
-                                         (find-files source "R600_rlc\\.bin|RS780_.*\\.bin$|LICENSE.radeon"))
+                               (copy-recursively source fw-dir)
                                #t))))
-
-    (home-page "")
-    (synopsis "Non-free firmware for Radeon integrated chips")
-    (description "Non-free firmware for Radeon integrated chips")
+    (home-page "https://kernel.org/")
+    (synopsis "Non-free firmware")
+    (description "Non-free firmware")
     ;; FIXME: What license?
-    (license (non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=LICENCE.radeon_firmware;hb=HEAD"))))
+    (license non-copyleft)))
 
-(define-public RTL8188CE-firmware-non-free
-  (package
-    (name "RTL8188CE-firmware-non-free")
-    (version "f6c767f398fc34a89d05d970ed04e21b781fc33f")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git")
-                    (commit version)))
-              (sha256
-               (base32
-                "1lpqigsw93xswcxw9ykxmms2smx86070mg51jqpf7n9w9h6jjs79"))))
-    (build-system trivial-build-system)
-    (arguments
-     `(#:modules ((guix build utils))
-                 #:builder (begin
-                             (use-modules (guix build utils))
-                             (let ((source (assoc-ref %build-inputs "source"))
-                                   (fw-dir (string-append %output "/lib/firmware/rtlwifi/")))
-                               (mkdir-p fw-dir)
-                               (for-each (lambda (file)
-                                           (copy-file file
-                                                      (string-append fw-dir "/"
-                                                                     (basename file))))
-                                         (find-files source "rtl8192.*\\.bin$|LICENCE.rtlwifi_firmware.txt"))
-                               #t))))
-
-    (home-page "")
-    (synopsis "Non-free firmware for Realtek WiFi chips")
-    (description "Non-free firmware for Realtek WiFi chips")
-    ;; FIXME: What license?
-    (license (non-copyleft "http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=blob_plain;f=LICENCE.rtlwifi_firmware;hb=HEAD"))))
 
 (define (linux-nonfree-urls version)
   "Return a list of URLs for Linux-Nonfree VERSION."
   (list (string-append
          "https://www.kernel.org/pub/linux/kernel/v4.x/"
          "linux-" version ".tar.xz")))
+
 
 (define-public linux-nonfree
   (let* ((version "4.6"))
@@ -127,3 +94,29 @@
     (version (package-version linux-nonfree))
     (source (package-source linux-nonfree))
     (license (package-license linux-nonfree))))
+
+
+(define-public linux-reiser4
+  (let* ((version "4.11.11"))
+    (package
+      (inherit linux-libre)
+      (name "linux-reiser4")
+      (version version)
+      (source (origin
+                (method url-fetch)
+                (uri (linux-nonfree-urls version))
+                (sha256
+                 (base32
+                  "1dvs1r3vq15akyv0yxvim6j09pqac5dagqbchvdlsw5yi4fnylc8"))
+                (patches (list (computed-file "reiser4-for-4.11.0.patch"
+                                              (let ((compressed (origin (method url-fetch)
+                                                                        (uri "https://downloads.sourceforge.net/project/reiser4/reiser4-for-linux-4.x/reiser4-for-4.11.0.patch.gz")
+                                                                        (sha256 (base32 "1qc421bqassrxv7z5pzsnwsf9d5pz0azm96rykxh02xlrf8ig3hc")))))
+                                                #~(system
+                                                   (string-append #+(file-append gzip "/bin/gunzip")
+                                                                  " < " #$compressed
+                                                                  " > " #$output))))))))
+      (synopsis "Linux with Reiser4 patch.")
+      (description "Linux-Reiser4 is a kernel that supports Reiser4 FS.")
+      (license gpl2)
+      (home-page "https://reiser4.wiki.kernel.org/index.php/Main_Page"))))
