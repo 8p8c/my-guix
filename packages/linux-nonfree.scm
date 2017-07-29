@@ -36,7 +36,7 @@
 (define-public firmware-nonfree
   (package
     (name "firmware-nonfree")
-    (version "37857004a430e96dc837db7f967b6d0279053de8")
+    (version "7d2c913dcd1be083350d97a8cb1eba24cfacbc8a")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -45,7 +45,7 @@
                     (commit version)))
               (sha256
                (base32
-                "08nw19yl98vcxqzwipacsv6d8b04fyr7qgij5092nnwmlysqxl9a"))))
+                "1xwzsfa4x43z6s3284hmwgpxbvr15gg89bdanhg7i2xcll4xspxp"))))
     (build-system trivial-build-system)
     (arguments
      `(#:modules ((guix build utils))
@@ -97,7 +97,7 @@
 
 
 (define-public linux-reiser4
-  (let* ((version "4.11.11"))
+  (let* ((version "4.11.12"))
     (package
       (inherit linux-libre)
       (name "linux-reiser4")
@@ -107,7 +107,7 @@
                 (uri (linux-nonfree-urls version))
                 (sha256
                  (base32
-                  "1dvs1r3vq15akyv0yxvim6j09pqac5dagqbchvdlsw5yi4fnylc8"))
+                  "14k10g9w8dp3lmw1qjns395a2fcaq2iw1jijss5npxllh3hx8drf"))
                 (patches (list (computed-file "reiser4-for-4.11.0.patch"
                                               (let ((compressed (origin (method url-fetch)
                                                                         (uri "https://downloads.sourceforge.net/project/reiser4/reiser4-for-linux-4.x/reiser4-for-4.11.0.patch.gz")
