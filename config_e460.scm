@@ -11,10 +11,14 @@
                      pulseaudio
                      ssh
                      version-control
+                     linux
+                     file
+                     base
+                     vpn
                      emacs)
 
 (operating-system
- (kernel linux-nonfree)
+ (kernel linux-reiser4)
  (firmware (cons*
             firmware-nonfree
             %base-firmware))
@@ -56,14 +60,18 @@
  (packages (cons* nss-certs         ;for HTTPS access
                   gvfs              ;for user mounts
                   icecat            ;Firefox
+                  bridge-utils
+                  file
                   font-hack
                   git
                   gnome-tweak-tool
                   lsh
+                  openvpn
                   pulseaudio
                   pavucontrol
                   sudo
                   emacs
+                  which
                   %base-packages))
 
  ;; Add GNOME and/or Xfce---we can choose at the log-in
