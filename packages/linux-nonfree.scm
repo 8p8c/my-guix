@@ -115,7 +115,13 @@
                                                 #~(system
                                                    (string-append #+(file-append gzip "/bin/gunzip")
                                                                   " < " #$compressed
-                                                                  " > " #$output))))))))
+                                                                  " > " #$output))))
+                               (origin
+                                (method url-fetch)
+                                (uri "https://raw.githubusercontent.com/8p8c/my-guix/master/linux-reiser4enabled.patch")
+                                (sha256
+                                 (base32
+                                  "1wkdfiwzhj77crgzpcb5wzzz0zbk8k8m3b9l355cjddg03l4y803")))))))
       (synopsis "Linux with Reiser4 patch.")
       (description "Linux-Reiser4 is a kernel that supports Reiser4 FS.")
       (license gpl2)
