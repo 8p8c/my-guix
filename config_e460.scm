@@ -15,6 +15,7 @@
                      file
                      base
                      vpn
+                     video
                      emacs)
 
 (operating-system
@@ -66,6 +67,7 @@
                   git
                   gnome-tweak-tool
                   lsh
+                  obs
                   openvpn
                   pulseaudio
                   pavucontrol
