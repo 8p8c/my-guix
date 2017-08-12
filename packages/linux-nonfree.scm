@@ -121,7 +121,7 @@
                                 (uri "https://raw.githubusercontent.com/8p8c/my-guix/master/linux-reiser4enabled.patch")
                                 (sha256
                                  (base32
-                                  "1wkdfiwzhj77crgzpcb5wzzz0zbk8k8m3b9l355cjddg03l4y803")))))))
+                                  "0lcq896a3is3ycr0ajnx95m5z8qyjs29876yz6qm64z369di1wb5")))))))
       (synopsis "Linux with Reiser4 patch.")
       (description "Linux-Reiser4 is a kernel that supports Reiser4 FS.")
       (license gpl2)

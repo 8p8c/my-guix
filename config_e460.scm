@@ -16,6 +16,7 @@
                      base
                      vpn
                      video
+                     java
                      emacs)
 
 (operating-system
@@ -62,17 +63,19 @@
                   gvfs              ;for user mounts
                   icecat            ;Firefox
                   bridge-utils
+                  emacs
                   file
                   font-hack
                   git
                   gnome-tweak-tool
+                  icedtea
                   lsh
                   obs
                   openvpn
                   pulseaudio
                   pavucontrol
                   sudo
-                  emacs
+                  vlc
                   which
                   %base-packages))
 
