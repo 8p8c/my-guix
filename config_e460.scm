@@ -3,21 +3,22 @@
              (linux-nonfree))
 (use-service-modules desktop)
 (use-package-modules admin
-                     certs
+                     base
                      bootloaders
+                     certs
+                     emacs
+                     file
                      fonts
                      gnome
                      gnuzilla
+                     java
+                     linux
+                     music
                      pulseaudio
                      ssh
                      version-control
-                     linux
-                     file
-                     base
-                     vpn
                      video
-                     java
-                     emacs)
+                     vpn)
 
 (operating-system
  (kernel linux-reiser4)
@@ -59,24 +60,25 @@
               %base-user-accounts))
 
  ;; This is where we specify system-wide packages.
- (packages (cons* nss-certs         ;for HTTPS access
-                  gvfs              ;for user mounts
-                  icecat            ;Firefox
-                  bridge-utils
+ (packages (cons* bridge-utils
                   emacs
                   file
                   font-hack
                   git
                   gnome-tweak-tool
+                  gvfs              ;for user mounts
+                  icecat            ;Firefox
                   icedtea
                   lsh
                   obs
                   openvpn
-                  pulseaudio
                   pavucontrol
+                  pulseaudio
                   sudo
+                  tuxguitar
                   vlc
                   which
+                  nss-certs         ;for HTTPS access
                   %base-packages))
 
  ;; Add GNOME and/or Xfce---we can choose at the log-in
