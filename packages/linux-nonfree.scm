@@ -108,14 +108,12 @@
                 (sha256
                  (base32
                   "14k10g9w8dp3lmw1qjns395a2fcaq2iw1jijss5npxllh3hx8drf"))
-                (patches (list (computed-file "reiser4-for-4.11.0.patch"
-                                              (let ((compressed (origin (method url-fetch)
-                                                                        (uri "https://downloads.sourceforge.net/project/reiser4/reiser4-for-linux-4.x/reiser4-for-4.11.0.patch.gz")
-                                                                        (sha256 (base32 "1qc421bqassrxv7z5pzsnwsf9d5pz0azm96rykxh02xlrf8ig3hc")))))
-                                                #~(system
-                                                   (string-append #+(file-append gzip "/bin/gunzip")
-                                                                  " < " #$compressed
-                                                                  " > " #$output))))
+                (patches (list (origin
+                                (method url-fetch)
+                                (uri "https://raw.githubusercontent.com/8p8c/my-guix/master/reiser4-for-4.11.0.patch")
+                                (sha256
+                                 (base32
+                                  "0mwd2s8fzcrm3g9yzr07n1mdxp4sb246yxsxkd07g0mz41y5jrr0")))
                                (origin
                                 (method url-fetch)
                                 (uri "https://raw.githubusercontent.com/8p8c/my-guix/master/linux-reiser4enabled.patch")
