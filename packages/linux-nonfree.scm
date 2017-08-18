@@ -23,7 +23,7 @@
 
 (define-module (linux-nonfree)
   #:use-module ((guix licenses) #:hide (zlib))
-  #:use-module (gnu packages linux)
+  #:use-module (linux)
   #:use-module (gnu packages compression)
   #:use-module (guix build-system trivial)
   #:use-module (guix git-download)
