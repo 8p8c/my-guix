@@ -3,12 +3,14 @@
              (linux-nonfree))
 (use-service-modules desktop)
 (use-package-modules admin
+                     avr
                      base
                      bootloaders
                      certs
                      emacs
                      file
                      fonts
+                     gimp
                      gnome
                      gnuzilla
                      java
@@ -18,10 +20,15 @@
                      ssh
                      version-control
                      video
-                     vpn)
+                     vpn
+                     wget)
 
 (operating-system
- (kernel linux-reiser4)
+  (kernel linux-reiser4)
+  (initrd (lambda (fs . args)
+            (apply base-initrd fs
+                   #:extra-modules '("reiser4.ko")
+                   args)))
  (firmware (cons*
             firmware-nonfree
             %base-firmware))
@@ -60,16 +67,19 @@
               %base-user-accounts))
 
  ;; This is where we specify system-wide packages.
- (packages (cons* bridge-utils
+ (packages (cons* avr-toolchain
+                  bridge-utils
                   emacs
                   file
                   font-hack
+                  gimp
                   git
                   gnome-tweak-tool
                   gvfs              ;for user mounts
                   icecat            ;Firefox
                   icedtea
                   lsh
+                  nss-certs         ;for HTTPS access
                   obs
                   openvpn
                   pavucontrol
@@ -77,8 +87,8 @@
                   sudo
                   tuxguitar
                   vlc
+                  wget
                   which
-                  nss-certs         ;for HTTPS access
                   %base-packages))
 
  ;; Add GNOME and/or Xfce---we can choose at the log-in
