@@ -1,12 +1,14 @@
 (use-modules (gnu)
              (gnu system nss)
-             (linux-nonfree))
+             (linux-nonfree)
+             (xawtv))
 (use-service-modules desktop)
-(use-package-modules admin
-                     avr
+(use-package-modules avr
+                     admin
                      base
                      bootloaders
                      certs
+                     compression
                      emacs
                      file
                      fonts
@@ -16,12 +18,17 @@
                      java
                      linux
                      music
+                     perl
+                     php
                      pulseaudio
+                     python
+                     ruby
                      ssh
                      version-control
                      video
                      vpn
-                     wget)
+                     wget
+                     xorg)
 
 (operating-system
   (kernel linux-reiser4)
@@ -67,7 +74,7 @@
               %base-user-accounts))
 
  ;; This is where we specify system-wide packages.
- (packages (cons* avr-toolchain
+ (packages (cons* 
                   bridge-utils
                   emacs
                   file
@@ -76,6 +83,7 @@
                   git
                   gnome-tweak-tool
                   gvfs              ;for user mounts
+                  htop
                   icecat            ;Firefox
                   icedtea
                   lsh
@@ -83,12 +91,21 @@
                   obs
                   openvpn
                   pavucontrol
+                  perl
+                  php
                   pulseaudio
+                  python
+                  ruby
                   sudo
                   tuxguitar
+                  unzip
                   vlc
                   wget
                   which
+                  xawtv
+                  xfontsel
+                  xlsfonts
+                  zip
                   %base-packages))
 
  ;; Add GNOME and/or Xfce---we can choose at the log-in
@@ -96,7 +113,6 @@
  ;; include the X11 log-in service, networking with Wicd,
  ;; and more.
  (services (cons* (gnome-desktop-service)
-                  (xfce-desktop-service)
                   %desktop-services))
 
  ;; Allow resolution of '.local' host names with mDNS.
